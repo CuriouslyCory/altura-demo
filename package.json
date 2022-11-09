@@ -17,6 +17,8 @@
     "@trpc/next": "10.0.0-rc.0",
     "@trpc/react-query": "10.0.0-rc.0",
     "@trpc/server": "10.0.0-rc.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.2.1",
     "next": "13.0.1",
     "react": "^0.0.0-experimental-4ea063b56-20221101",
     "react-dom": "^0.0.0-experimental-4ea063b56-20221101",
