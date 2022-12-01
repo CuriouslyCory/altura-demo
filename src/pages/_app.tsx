@@ -5,14 +5,18 @@ import { AuthContextProvider } from "../features/auth/hooks/useAuthContext";
 import { Layout } from "../features/layout/components/layout";
 
 import "../styles/globals.css";
+import { QueryClientProvider, useQueryClient } from "@tanstack/react-query";
 
 const MyApp: AppType = ({ Component, pageProps }) => {
+  const queryClient = useQueryClient();
   return (
-    <AuthContextProvider>
-      <Layout>
-        <Component {...pageProps} />;
-      </Layout>
-    </AuthContextProvider>
+    <QueryClientProvider client={queryClient}>
+      <AuthContextProvider>
+        <Layout>
+          <Component {...pageProps} />;
+        </Layout>
+      </AuthContextProvider>
+    </QueryClientProvider>
   );
 };
 
