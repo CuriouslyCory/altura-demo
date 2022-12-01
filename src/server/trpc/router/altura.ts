@@ -14,7 +14,7 @@ export const alturaRouter = router({
     .query(({ input }) => {
       const altura = new Altura(process.env.ALTURA_KEY);
       const itemResponse = altura.getItem(
-        "0x2374b2380760e9ff066ef396ebbf752cc65c1ec3",
+        "0xc7e23bc42571735c1b5e9c00775de5103994efcf",
         input.itemId
       );
       return itemResponse;
