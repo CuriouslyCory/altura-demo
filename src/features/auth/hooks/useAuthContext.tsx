@@ -1,3 +1,4 @@
+import type { Character } from "@prisma/client";
 import type { ReactNode } from "react";
 import { useEffect } from "react";
 import { useMemo } from "react";
@@ -8,6 +9,7 @@ export type AuthContextValues = {
   authKey?: string;
   isAuthenticated: boolean;
   handleLogin: (address: string, alturaGuard: string) => void;
+  handleLogout: () => void;
 };
 
 const AuthContext = createContext<AuthContextValues | null>(null);
@@ -41,12 +43,12 @@ export const AuthContextProvider = ({
   ) => {
     verifiyAlturaGuard
       .mutateAsync({ address: address, alturaGuard: alturaGuard })
-      .then((resp: boolean) => {
-        console.log("is this authenticated?", resp);
+      .then((authResponse: Character) => {
+        console.log("is this authenticated?", authResponse);
         const newState = {
           ...state,
-          isAuthenticated: resp,
-          authKey: `${resp}`,
+          isAuthenticated: !!authResponse,
+          authKey: authResponse.session ?? "",
         };
         setState(newState);
         saveAuthContext(newState);
@@ -57,12 +59,23 @@ export const AuthContextProvider = ({
       });
   };
 
+  const handleLogout = () => {
+    const newState = {
+      ...state,
+      isAuthenticated: false,
+      authKey: undefined,
+    };
+    setState(newState);
+    saveAuthContext(newState);
+  };
+
   return (
     <AuthContext.Provider
       value={{
         authKey: state?.authKey,
         isAuthenticated: state?.isAuthenticated ?? false,
         handleLogin,
+        handleLogout,
       }}
     >
       {children}

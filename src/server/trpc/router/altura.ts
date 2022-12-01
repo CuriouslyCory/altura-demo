@@ -1,7 +1,11 @@
 import { Altura } from "@altura/altura-js";
+import { TRPCError } from "@trpc/server";
 import { z } from "zod";
-
 import { router, publicProcedure } from "../trpc";
+import { prisma } from "../../db/client";
+import { SHA256 } from "crypto-js";
+import { newCharacterTemplate } from "../../../features/character/constants/new-character";
+
 const altura = new Altura(process.env.ALTURA_KEY);
 
 export const alturaRouter = router({
@@ -36,8 +40,26 @@ export const alturaRouter = router({
       return altura
         .authenticateUser(input.address, input.alturaGuard)
         .then((response: { authenticated: boolean }) => {
-          console.log("response", response);
-          return response.authenticated;
+          if (!response.authenticated)
+            throw new TRPCError({
+              code: "UNAUTHORIZED",
+              message: "Failed to authenticate user",
+            });
+          const newSessionId = SHA256(
+            `${input.address}${Date.now()}`
+          ).toString();
+          return prisma.character.upsert({
+            where: { walletAddress: input.address },
+            create: {
+              walletAddress: input.address,
+              session: newSessionId,
+              ...newCharacterTemplate,
+            },
+            update: { session: newSessionId },
+          });
+        })
+        .then((response) => {
+          return response;
         });
     }),
 });
