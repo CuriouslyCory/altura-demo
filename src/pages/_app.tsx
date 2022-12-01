@@ -1,13 +1,17 @@
 import { type AppType } from "next/app";
+
 import { trpc } from "../utils/trpc";
-import { AuthContextProvider } from "../features/login/hooks/useAuthContext";
+import { AuthContextProvider } from "../features/auth/hooks/useAuthContext";
+import { Layout } from "../features/layout/components/layout";
 
 import "../styles/globals.css";
 
 const MyApp: AppType = ({ Component, pageProps }) => {
   return (
     <AuthContextProvider>
-      <Component {...pageProps} />;
+      <Layout>
+        <Component {...pageProps} />;
+      </Layout>
     </AuthContextProvider>
   );
 };
