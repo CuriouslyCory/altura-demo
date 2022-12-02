@@ -50,7 +50,7 @@ export const CharacterDetails = (): JSX.Element => {
       <div
         tabIndex={0}
         className={clsx(
-          "border-grey-500 absolute right-0 rounded-md border p-5 transition-all duration-500 ease-in-out mt-3 bg-slate-300",
+          "border-grey-500 absolute right-0 mt-3 rounded-md border bg-slate-300 p-5 transition-all duration-500 ease-in-out",
           {
             hidden: !isOpen,
           }
