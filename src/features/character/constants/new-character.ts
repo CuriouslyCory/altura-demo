@@ -1,6 +1,8 @@
 export const newCharacterTemplate = {
   name: "",
-  hp: 10,
-  mp: 0,
+  maxHp: 10,
+  currentHp: 10,
+  maxMp: 0,
+  currentMp: 0,
   exp: 0,
 } as const;
