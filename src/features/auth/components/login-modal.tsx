@@ -2,7 +2,7 @@ import clsx from "clsx";
 import type { ChangeEvent } from "react";
 import { useEffect } from "react";
 import { useState } from "react";
-import { useAuthContext } from "../hooks/useAuthContext";
+import { useAuthContext } from "../hooks/use-auth-context";
 
 export const LoginModal = (): JSX.Element => {
   const [state, setState] = useState({
