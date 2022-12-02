@@ -1,11 +1,11 @@
 import type { Character } from "@prisma/client";
-import { useCallback, useMemo } from "react";
+import { useCallback } from "react";
 import type { ZeroXAddress } from "../../../types/zero-x-address";
 import { trpc } from "../../../utils/trpc";
 import { useAuthContext } from "../../auth/hooks/use-auth-context";
 
 type CharacterUpdateFn = {
-  setName: (name: string) => Promise<Character>;
+  setName: (name: string) => Promise<Character> | undefined;
   setHp: (hp: number) => void;
   setMaxHp: (maxHp: number) => void;
   setMp: (mp: number) => void;
@@ -26,7 +26,7 @@ export const useCharacter = (walletAddress: ZeroXAddress) => {
   });
 
   const setName = useCallback(
-    (name: string, onSuccess: () => void) => {
+    (name: string, onSuccess?: () => void) => {
       if (!session) return;
       console.log("setName", name);
       return updateNameMutation
@@ -35,7 +35,10 @@ export const useCharacter = (walletAddress: ZeroXAddress) => {
           walletAddress,
           session: session,
         })
-        .then(() => onSuccess());
+        .then((character: Character) => {
+          onSuccess?.();
+          return character;
+        });
     },
     [updateNameMutation, session, walletAddress]
   );
@@ -46,16 +49,13 @@ export const useCharacter = (walletAddress: ZeroXAddress) => {
   const setMaxMp = (maxMp: number) => {};
   const setXp = (xp: number) => {};
 
-  return useMemo(
-    () => ({
-      ...character,
-      setName,
-      setHp,
-      setMaxHp,
-      setMp,
-      setMaxMp,
-      setXp,
-    }),
-    [setName, setHp, setMaxHp, setMp, setMaxMp, setXp, character]
-  );
+  return {
+    ...character,
+    setName,
+    setHp,
+    setMaxHp,
+    setMp,
+    setMaxMp,
+    setXp,
+  };
 };
