@@ -14,10 +14,13 @@ model Character {
   id            String    @id @default(cuid())
   name          String
   walletAddress String    @unique
-  hp            Int       @default(10)
-  mp            Int       @default(0)
+  maxHp         Int       @default(10)
+  currentHp     Int       @default(10)
+  maxMp         Int       @default(0)
+  currentMp     Int       @default(0)
   exp           Int       @default(0)
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
   session       String?
+  @@unique([walletAddress, session])
 }
