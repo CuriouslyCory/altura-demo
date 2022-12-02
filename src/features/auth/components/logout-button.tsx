@@ -1,4 +1,4 @@
-import { useAuthContext } from "../hooks/useAuthContext";
+import { useAuthContext } from "../hooks/use-auth-context";
 
 export const LogoutButton = (): JSX.Element => {
   const { isAuthenticated, handleLogout } = useAuthContext();

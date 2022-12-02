@@ -1,7 +1,7 @@
 import { type AppType } from "next/app";
 
 import { trpc } from "../utils/trpc";
-import { AuthContextProvider } from "../features/auth/hooks/useAuthContext";
+import { AuthContextProvider } from "../features/auth/hooks/use-auth-context";
 import { Layout } from "../features/layout/components/layout";
 
 import "../styles/globals.css";
