@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@altura/altura-js": "^1.0.9",
+    "@hookform/resolvers": "^2.9.10",
     "@prisma/client": "^4.5.0",
     "@tanstack/react-query": "^4.10.0",
     "@trpc/client": "10.0.0-rc.0",
@@ -25,6 +26,8 @@
     "next": "13.0.1",
     "react": "^0.0.0-experimental-4ea063b56-20221101",
     "react-dom": "^0.0.0-experimental-4ea063b56-20221101",
+    "react-hook-form": "^7.40.0",
+    "react-icons": "^4.7.1",
     "superjson": "1.9.1",
     "zod": "^3.18.0"
   },
