@@ -3,12 +3,14 @@ import type { ReactNode } from "react";
 import { useEffect } from "react";
 import { useMemo } from "react";
 import { createContext, useContext, useState } from "react";
+import type { ZeroXAddress } from "../../../types/zero-x-address";
 import { trpc } from "../../../utils/trpc";
 
 export type AuthContextValues = {
-  authKey?: string;
+  session?: string;
+  walletAddress?: ZeroXAddress;
   isAuthenticated: boolean;
-  handleLogin: (address: string, alturaGuard: string) => void;
+  handleLogin: (address: ZeroXAddress, alturaGuard: string) => void;
   handleLogout: () => void;
 };
 
@@ -37,7 +39,7 @@ export const AuthContextProvider = ({
   const verifiyAlturaGuard = trpc.altura.verifyAultraGuard.useMutation();
 
   const handleLogin = (
-    address: string,
+    address: ZeroXAddress,
     alturaGuard: string,
     onLogin?: () => void
   ) => {
@@ -47,8 +49,9 @@ export const AuthContextProvider = ({
         console.log("is this authenticated?", authResponse);
         const newState = {
           ...state,
+          walletAddress: address,
           isAuthenticated: !!authResponse,
-          authKey: authResponse.session ?? "",
+          session: authResponse.session ?? "",
         };
         setState(newState);
         saveAuthContext(newState);
@@ -63,7 +66,8 @@ export const AuthContextProvider = ({
     const newState = {
       ...state,
       isAuthenticated: false,
-      authKey: undefined,
+      session: undefined,
+      walletAddress: undefined,
     };
     setState(newState);
     saveAuthContext(newState);
@@ -72,8 +76,9 @@ export const AuthContextProvider = ({
   return (
     <AuthContext.Provider
       value={{
-        authKey: state?.authKey,
+        session: state?.session,
         isAuthenticated: state?.isAuthenticated ?? false,
+        walletAddress: state?.walletAddress,
         handleLogin,
         handleLogout,
       }}
