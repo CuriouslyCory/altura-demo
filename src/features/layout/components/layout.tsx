@@ -13,7 +13,6 @@ export const Layout = ({ children }: LayoutProps): JSX.Element => {
   return (
     <>
       <Head>
-        <title>{mainTitle}</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <LoginModal />
