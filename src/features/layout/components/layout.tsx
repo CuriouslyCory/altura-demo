@@ -1,5 +1,6 @@
 import Head from "next/head";
 import type { ReactNode } from "react";
+import { mainTitle } from "../../../constants/title";
 import LoginModal from "../../auth/components/login-modal";
 import { Footer } from "./footer";
 import { Header } from "./header";
@@ -12,7 +13,7 @@ export const Layout = ({ children }: LayoutProps): JSX.Element => {
   return (
     <>
       <Head>
-        <title>Altura NFT Game</title>
+        <title>{mainTitle}</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <LoginModal />
