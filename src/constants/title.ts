@@ -1,1 +1,1 @@
-export const mainTitle = "Gods of Dice";
+export const mainTitle = "Dice of Gods";

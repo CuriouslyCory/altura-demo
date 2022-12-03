@@ -3,10 +3,11 @@ import Head from "next/head";
 import { mainTitle } from "../constants/title";
 
 const Home: NextPage = () => {
+  const title = `${mainTitle} - Home`;
   return (
     <>
       <Head>
-        <title>{mainTitle} - Home</title>
+        <title>{title}</title>
         <meta
           name="description"
           content="Game developed using create-t3-app and Altura Nfts"

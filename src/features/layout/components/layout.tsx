@@ -14,6 +14,7 @@ export const Layout = ({ children }: LayoutProps): JSX.Element => {
     <>
       <Head>
         <link rel="icon" href="/favicon.ico" />
+        <title>{mainTitle}</title>
       </Head>
       <LoginModal />
       <div className="flex min-h-screen flex-col">
