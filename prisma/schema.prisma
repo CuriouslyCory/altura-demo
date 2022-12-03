@@ -19,8 +19,27 @@ model Character {
   maxMp         Int       @default(0)
   currentMp     Int       @default(0)
   exp           Int       @default(0)
+  dice          Dice[]
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
   session       String?
   @@unique([walletAddress, session])
+}
+
+model DiceSide {
+  id            String    @id @default(cuid())
+  tokenId       Int
+  diceId        String
+  dice          Dice      @relation(fields: [diceId], references: [id])
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+model Dice {
+  id          String   @id @default(cuid())
+  characterId String
+  character   Character @relation(fields: [characterId], references: [id])
+  sides       DiceSide[]
+  diceIndex   Int
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }
