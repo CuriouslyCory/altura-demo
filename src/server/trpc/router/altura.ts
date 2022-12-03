@@ -4,7 +4,10 @@ import { z } from "zod";
 import { router, publicProcedure } from "../trpc";
 import { prisma } from "../../db/client";
 import { SHA256 } from "crypto-js";
-import { newCharacterTemplate } from "../../../features/character/constants/new-character";
+import {
+  diceTemplate,
+  newCharacterTemplate,
+} from "../../../features/character/constants/new-character";
 
 const altura = new Altura(process.env.ALTURA_KEY);
 
@@ -51,11 +54,19 @@ export const alturaRouter = router({
           return prisma.character.upsert({
             where: { walletAddress: input.address },
             create: {
+              ...newCharacterTemplate,
               walletAddress: input.address,
               session: newSessionId,
-              ...newCharacterTemplate,
+              dice: {
+                create: [
+                  { ...diceTemplate, diceIndex: 0 },
+                  { ...diceTemplate, diceIndex: 1 },
+                  { ...diceTemplate, diceIndex: 2 },
+                ],
+              },
             },
             update: { session: newSessionId },
+            include: { dice: { include: { sides: true } } },
           });
         })
         .then((response) => {

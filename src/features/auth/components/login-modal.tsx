@@ -2,11 +2,18 @@ import clsx from "clsx";
 import type { ChangeEvent } from "react";
 import { useEffect } from "react";
 import { useState } from "react";
+import type { ZeroXAddress } from "../../../types/zero-x-address";
 import { useAuthContext } from "../hooks/use-auth-context";
 
+type LoginModalState = {
+  address: ZeroXAddress;
+  alturaGuard: string;
+  isOpen: boolean;
+};
+
 export const LoginModal = (): JSX.Element => {
-  const [state, setState] = useState({
-    address: "",
+  const [state, setState] = useState<LoginModalState>({
+    address: "0x0",
     alturaGuard: "",
     isOpen: false,
   });
@@ -20,7 +27,7 @@ export const LoginModal = (): JSX.Element => {
 
   const onAddressChange = (event: ChangeEvent<HTMLInputElement>) => {
     console.log("event target", event.target.value);
-    setState({ ...state, address: event.target.value });
+    setState({ ...state, address: event.target.value as ZeroXAddress });
   };
 
   const onCodeChange = (event: ChangeEvent<HTMLInputElement>) => {

@@ -6,6 +6,15 @@ import { useAuthContext } from "../../auth/hooks/use-auth-context";
 import { useCharacter } from "../hooks/use-character";
 import clsx from "clsx";
 import { Toast } from "../../../components/toast/toast";
+import {
+  GiBroadsword,
+  GiDiceShield,
+  GiBubblingFlask,
+  GiChest,
+  GiDiceFire,
+  GiBandageRoll,
+} from "react-icons/gi";
+import { DiceManager } from "./dice-manager";
 
 export const characterValidationSchema = z.object({
   name: z.string().min(1).max(40),
@@ -71,6 +80,7 @@ export const CharacterDetails = (): JSX.Element => {
               <p className="text-red-700">{formState.errors.name?.message}</p>
             )}
           </form>
+          <DiceManager />
         </div>
       </div>
       <Toast

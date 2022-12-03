@@ -1,3 +1,16 @@
+export const diceTemplate = {
+  sides: {
+    create: [
+      { tokenId: 1 },
+      { tokenId: 2 },
+      { tokenId: 3 },
+      { tokenId: 1 },
+      { tokenId: 2 },
+      { tokenId: 3 },
+    ],
+  },
+};
+
 export const newCharacterTemplate = {
   name: "",
   maxHp: 10,
