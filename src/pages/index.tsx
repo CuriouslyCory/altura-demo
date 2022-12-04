@@ -4,6 +4,7 @@ import { mainTitle } from "../constants/title";
 
 const Home: NextPage = () => {
   const title = `${mainTitle} - Home`;
+
   return (
     <>
       <Head>

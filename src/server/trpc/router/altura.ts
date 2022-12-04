@@ -8,6 +8,7 @@ import {
   diceTemplate,
   newCharacterTemplate,
 } from "../../../features/character/constants/new-character";
+import { contractAddresses } from "../../../constants/contractAddresses";
 
 const altura = new Altura(process.env.ALTURA_KEY);
 
@@ -21,7 +22,7 @@ export const alturaRouter = router({
     .query(({ input }) => {
       const altura = new Altura(process.env.ALTURA_KEY);
       const itemResponse = altura.getItem(
-        "0xc7e23bc42571735c1b5e9c00775de5103994efcf",
+        contractAddresses[5].abilityCollection,
         input.itemId
       );
       return itemResponse;
@@ -70,6 +71,34 @@ export const alturaRouter = router({
           });
         })
         .then((response) => {
+          altura
+            .mintAdditionalSupply(
+              contractAddresses[5].abilityCollection,
+              2,
+              6,
+              input.address
+            )
+            .then((mintResponse) => {
+              console.log("mintResponse", mintResponse);
+              return altura.mintAdditionalSupply(
+                contractAddresses[5].abilityCollection,
+                3,
+                6,
+                input.address
+              );
+            })
+            .then((mintResponse) => {
+              console.log("mintResponse", mintResponse);
+              return altura.mintAdditionalSupply(
+                contractAddresses[5].abilityCollection,
+                4,
+                6,
+                input.address
+              );
+            })
+            .catch((error) => {
+              console.log(error);
+            });
           return response;
         });
     }),

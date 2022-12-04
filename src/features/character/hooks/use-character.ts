@@ -17,6 +17,11 @@ export const useCharacter = (walletAddress: ZeroXAddress) => {
   const utils = trpc.useContext().character;
   const { session } = useAuthContext();
 
+  const { data: abilities } = trpc.character.getAllAbilitiesOnChain.useQuery({
+    sessionId: session ?? "",
+    walletAddress,
+  });
+
   const { data: character } = trpc.character.get.useQuery({
     walletAddress,
   });
@@ -28,7 +33,6 @@ export const useCharacter = (walletAddress: ZeroXAddress) => {
   const setName = useCallback(
     (name: string, onSuccess?: () => void) => {
       if (!session) return;
-      console.log("setName", name);
       return updateNameMutation
         .mutateAsync({
           name,
@@ -51,6 +55,7 @@ export const useCharacter = (walletAddress: ZeroXAddress) => {
 
   return {
     ...character,
+    abilities,
     setName,
     setHp,
     setMaxHp,
