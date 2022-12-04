@@ -33,7 +33,6 @@ export const CharacterDetails = (): JSX.Element => {
 
   useEffect(() => {
     if (!name || !reset) return;
-    console.log("set name", name);
     reset({ name });
   }, [name, reset]);
 

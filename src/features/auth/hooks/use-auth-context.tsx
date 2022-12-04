@@ -26,7 +26,6 @@ export const AuthContextProvider = ({
   // loads state from localstorage on mount
   useEffect(() => {
     const state = localStorage.getItem("authContext");
-    console.log("found state in localstorage", state);
     if (!state) return;
     setState(JSON.parse(state));
   }, []);
@@ -46,7 +45,6 @@ export const AuthContextProvider = ({
     verifiyAlturaGuard
       .mutateAsync({ address: address, alturaGuard: alturaGuard })
       .then((authResponse: Character) => {
-        console.log("is this authenticated?", authResponse);
         const newState = {
           ...state,
           walletAddress: address,

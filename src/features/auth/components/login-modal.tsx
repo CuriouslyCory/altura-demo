@@ -26,12 +26,10 @@ export const LoginModal = (): JSX.Element => {
   }, [state, isAuthenticated]);
 
   const onAddressChange = (event: ChangeEvent<HTMLInputElement>) => {
-    console.log("event target", event.target.value);
     setState({ ...state, address: event.target.value as ZeroXAddress });
   };
 
   const onCodeChange = (event: ChangeEvent<HTMLInputElement>) => {
-    console.log("event target", event.target.value);
     setState({ ...state, alturaGuard: event.target.value });
   };
 
