@@ -1,5 +1,6 @@
 import { useAuthContext } from "../../auth/hooks/use-auth-context";
 import { useCharacter } from "../hooks/use-character";
+import { DiceConfig } from "./dice-config";
 
 export const DiceManager = (): JSX.Element => {
   const { walletAddress } = useAuthContext();
@@ -11,21 +12,9 @@ export const DiceManager = (): JSX.Element => {
         <h2>Dice</h2>
       </div>
       <div className="flex w-full justify-around">
-        <div className="flex h-24 w-24 items-center justify-around rounded-md border-2 border-slate-700">
-          {dice?.[0]?.sides.map((side) => (
-            <span key={`dice-1-sides-${side.id}`}>{side.tokenId}</span>
-          ))}
-        </div>
-        <div className="flex h-24 w-24 items-center justify-around rounded-md border-2 border-slate-700">
-          {dice?.[0]?.sides.map((side) => (
-            <span key={`dice-1-sides-${side.id}`}>{side.tokenId}</span>
-          ))}
-        </div>
-        <div className="flex h-24 w-24 items-center justify-around rounded-md border-2 border-slate-700">
-          {dice?.[0]?.sides.map((side) => (
-            <span key={`dice-1-sides-${side.id}`}>{side.tokenId}</span>
-          ))}
-        </div>
+        {dice?.map((die) => (
+          <DiceConfig key={`dice-manager-die-${die.id}`} die={die} />
+        ))}
       </div>
       <div className="flex w-full justify-around">
         <ul>

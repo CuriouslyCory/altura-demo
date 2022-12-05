@@ -27,6 +27,20 @@ export const alturaRouter = router({
       );
       return itemResponse;
     }),
+  getItems: publicProcedure
+    .input(
+      z.object({
+        itemIds: z.array(z.number()),
+      })
+    )
+    .query(({ input }) => {
+      const itemSet = new Set<number>();
+      input.itemIds.forEach((id) => itemSet.add(id));
+      const promises = Array.from(itemSet).map((itemId) =>
+        altura.getItem(contractAddresses[5].abilityCollection, itemId)
+      );
+      return Promise.all(promises);
+    }),
   getUser: publicProcedure
     .input(z.object({ address: z.string() }))
     .query(({ input }) => {

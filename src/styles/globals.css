@@ -1,3 +1,31 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+
+
+
+
+@layer components {
+    .grid > * {
+        width: 100%;
+    }
+    .die::before {
+        content: "";
+        display: inline-block;
+        width: 1px;
+        height: 0;
+        padding-top: 100%;
+    }
+    .die {
+        @apply relative items-center justify-around text-center rounded-md border-2 border-slate-700 w-full;
+        grid-column: 1 / 3;
+        &::before {
+            padding-top: 50%;
+        }
+    }
+    .die-content {
+        @apply absolute top-0 left-0 bottom-0 w-full grid items-center justify-around text-center;
+    }
+}
