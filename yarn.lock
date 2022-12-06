@@ -628,27 +628,27 @@
     "@tanstack/query-core" "4.14.1"
     use-sync-external-store "^1.2.0"
 
-"@trpc/client@10.0.0-rc.0":
-  version "10.0.0-rc.0"
-  resolved "https://registry.yarnpkg.com/@trpc/client/-/client-10.0.0-rc.0.tgz#ac47c7ed42978f14a11d0b48e2b29555a7482aa7"
-  integrity sha512-JqOE1GRwao1mp3UtY2AVB8iIMMryRMSwAJWZ/wMCI0UCuQn+Px6OSQx5OLvs9Yh8DR6QLJmvDOrx6/OT3fG/iQ==
+"@trpc/client@^10.4.3":
+  version "10.4.3"
+  resolved "https://registry.yarnpkg.com/@trpc/client/-/client-10.4.3.tgz#a0d9963481ac3ac6f3939f827654cdaa3a0c5fda"
+  integrity sha512-VMdyLHr6PG2FlMxnbPt/6jniDBxv3Ys1hFhk0AriFDD9h4Lg9fznwGn5RI1eV5RCOAoCQ/+ZwPMSKOMBhiycTw==
 
-"@trpc/next@10.0.0-rc.0":
-  version "10.0.0-rc.0"
-  resolved "https://registry.yarnpkg.com/@trpc/next/-/next-10.0.0-rc.0.tgz#9d354f143b55df4e9298b7e0ceb1acfa01db244c"
-  integrity sha512-olZwWzNCSumvqmv8I1iDuaLLX5Bvo/DRW0H9tsfzaVTtEVYooWx+x2xEGZEFmlTzOPZ0/s4ZBFaM8I/WMQY3aA==
+"@trpc/next@^10.4.3":
+  version "10.4.3"
+  resolved "https://registry.yarnpkg.com/@trpc/next/-/next-10.4.3.tgz#9ae8c50a79c90ea3e3b102c63f52b6f56b97bc35"
+  integrity sha512-H4sM3lrtA2seFFkgXcW3ZQLCqGS7YqJNYDQx8FOlvcoH+klmQ+UNNgurdP2R/i50nGFwc4aN9kENrsvq0xfH5A==
   dependencies:
     react-ssr-prepass "^1.5.0"
 
-"@trpc/react-query@10.0.0-rc.0":
-  version "10.0.0-rc.0"
-  resolved "https://registry.yarnpkg.com/@trpc/react-query/-/react-query-10.0.0-rc.0.tgz#5826225e5509eafe4f206bec84ec12b1ecdfbe2c"
-  integrity sha512-FCCz0gfY+GUMZUOGsSV2Q4rP3KU2E43amxYo3g4pdG8d10hDrgZPruzRGyGNCL3oYjj7oDUoe+DcoDY+qOPwgg==
+"@trpc/react-query@^10.4.3":
+  version "10.4.3"
+  resolved "https://registry.yarnpkg.com/@trpc/react-query/-/react-query-10.4.3.tgz#53aa3505f9ff5e2522c92b41f02f6288a1b4bea5"
+  integrity sha512-gm8hnV8Q7RPc0am0paSuu30+jk9cQoJhKByAdrTRoLUEkuDb7r78sebN6RM3OYMPfWfSBGutIoWHkjJzP2kdtw==
 
-"@trpc/server@10.0.0-rc.0":
-  version "10.0.0-rc.0"
-  resolved "https://registry.yarnpkg.com/@trpc/server/-/server-10.0.0-rc.0.tgz#5b32ace541beae0c9acff9b35310699f22297296"
-  integrity sha512-rLVnHrhrTM4xBheIfqtH1QojgWRCOSbJRw7wr6SVB3yRjCCsU+AZnSrhchMLuDW7Q59r+x3rpH3Wd6BlkydWWg==
+"@trpc/server@^10.4.3":
+  version "10.4.3"
+  resolved "https://registry.yarnpkg.com/@trpc/server/-/server-10.4.3.tgz#8db5dc9a5082feea593d58b845ceef6a1adaf3d9"
+  integrity sha512-U+TVFtMUnySUfKHXjdpdZdFS268naGafbjQiG/H7t0OKpiLnbJ4IhgyYzj82Hvghb6Ow9E+UTNt6ALP7KoN4/g==
 
 "@types/bn.js@^4.11.3":
   version "4.11.6"
@@ -1553,6 +1553,11 @@ concat-map@0.0.1:
   version "0.0.1"
   resolved "https://registry.yarnpkg.com/concat-map/-/concat-map-0.0.1.tgz#d8a96bd77fd68df7793a73036a3ba0d5405d477b"
   integrity sha512-/Srv4dswyQNBfohGpz9o6Yb3Gz3SrUDqBH5rTuhGR7ahtlbYKnVxw2bCFMRljaA7EXHaXZ8wsHdodFvbkhKmqg==
+
+cookie@^0.5.0:
+  version "0.5.0"
+  resolved "https://registry.yarnpkg.com/cookie/-/cookie-0.5.0.tgz#d1f5d71adec6558c58f389987c366aa47e994f8b"
+  integrity sha512-YZ3GUyn/o8gfKJlnlX7g7xq4gyO6OSuhGPKaaGssGB2qgDUS0gPgtTvoyZLTt9Ab6dC4hfc9dV5arkvc/OCmrw==
 
 cookiejar@^2.1.1:
   version "2.1.3"
