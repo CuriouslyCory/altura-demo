@@ -1,10 +1,9 @@
 import { z } from "zod";
 
-import { router, publicProcedure } from "../trpc";
+import { router, publicProcedure, protectedProcedure } from "../trpc";
 import { prisma } from "../../db/client";
 import { Altura } from "@altura/altura-js";
 import { contractAddresses } from "../../../constants/contractAddresses";
-import { TAlturaUser } from "@altura/altura-js/lib/types";
 
 const altura = new Altura(process.env.ALTURA_KEY);
 
@@ -51,21 +50,16 @@ export const characterRouter = router({
         ); // fetching items with the specified collection address only);
       return itemResponse;
     }),
-  updateName: publicProcedure
+  updateName: protectedProcedure
     .input(
       z.object({
         name: z.string().min(1).max(40),
-        walletAddress: z.string().startsWith("0x"),
-        session: z.string(),
       })
     )
-    .mutation(({ input }) => {
+    .mutation(({ input, ctx }) => {
       return prisma.character.update({
         where: {
-          walletAddress_session: {
-            walletAddress: input.walletAddress,
-            session: input.session,
-          },
+          walletAddress: ctx.session.character.walletAddress,
         },
         data: { name: input.name },
       });
