@@ -10,7 +10,7 @@ export const getServerAuthSession = async (ctx: {
 }) => {
   const session = await prisma.session.findUnique({
     where: {
-      sessionToken: ctx.req.cookies.sessionToken,
+      sessionToken: ctx.req.cookies.sessionToken ?? "",
     },
     include: { character: true },
   });

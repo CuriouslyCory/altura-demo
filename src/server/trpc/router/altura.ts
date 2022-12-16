@@ -71,7 +71,7 @@ export const alturaRouter = router({
             create: {
               ...newCharacterTemplate,
               walletAddress: input.address,
-
+              session: createSession(newSessionId),
               dice: {
                 create: [
                   { ...diceTemplate, diceIndex: 0 },
@@ -82,20 +82,17 @@ export const alturaRouter = router({
             },
             update: {
               //todo: centralize create session logic
-              session: {
-                create: [
-                  {
-                    sessionToken: newSessionId,
-                    expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 7),
-                  },
-                ],
-              },
+              session: createSession(newSessionId),
             },
-            include: { dice: { include: { sides: true } } },
+            include: {
+              dice: { include: { sides: true } },
+              session: { take: 1, orderBy: { expires: "desc" } },
+            },
           });
         })
-        .then((response) => {
+        .then(async (response) => {
           //const headers = new Headers()
+          if (response.createdAt !== response.updatedAt) return response;
           altura
             .mintAdditionalSupply(
               contractAddresses[5].abilityCollection,
@@ -127,4 +124,13 @@ export const alturaRouter = router({
           return response;
         });
     }),
+});
+
+const createSession = (newSessionId: string) => ({
+  create: [
+    {
+      sessionToken: newSessionId,
+      expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 7),
+    },
+  ],
 });

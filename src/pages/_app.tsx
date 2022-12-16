@@ -6,16 +6,19 @@ import { Layout } from "../features/layout/components/layout";
 
 import "../styles/globals.css";
 import { QueryClientProvider, useQueryClient } from "@tanstack/react-query";
+import { CookiesProvider } from "react-cookie";
 
 const MyApp: AppType = ({ Component, pageProps }) => {
   const queryClient = useQueryClient();
   return (
     <QueryClientProvider client={queryClient}>
-      <AuthContextProvider>
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
-      </AuthContextProvider>
+      <CookiesProvider>
+        <AuthContextProvider>
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </AuthContextProvider>
+      </CookiesProvider>
     </QueryClientProvider>
   );
 };

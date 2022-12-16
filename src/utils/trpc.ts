@@ -12,7 +12,7 @@ const getBaseUrl = () => {
 };
 
 export const trpc = createTRPCNext<AppRouter>({
-  config() {
+  config({ ctx }) {
     return {
       transformer: superjson,
       links: [
@@ -25,6 +25,20 @@ export const trpc = createTRPCNext<AppRouter>({
           url: `${getBaseUrl()}/api/trpc`,
         }),
       ],
+      headers: () => {
+        if (ctx?.req) {
+          // To use SSR properly, you need to forward the client's headers to the server
+          const headers = ctx?.req?.headers;
+          // If you're using Node 18, delete the "connection" header
+          delete headers?.connection;
+          return {
+            ...headers,
+            // optional - inform server that it's an ssr request
+            "x-ssr": "1",
+          };
+        }
+        return {};
+      },
     };
   },
   ssr: false,

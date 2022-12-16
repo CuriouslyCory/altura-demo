@@ -3,6 +3,7 @@ import type { ReactNode } from "react";
 import { useEffect } from "react";
 import { useMemo } from "react";
 import { createContext, useContext, useState } from "react";
+import { useCookies } from "react-cookie";
 import type { ZeroXAddress } from "../../../types/zero-x-address";
 import { trpc } from "../../../utils/trpc";
 
@@ -22,6 +23,7 @@ export const AuthContextProvider = ({
   children: ReactNode;
 }): JSX.Element => {
   const [state, setState] = useState<Partial<AuthContextValues>>();
+  const [cookies, setCookie, removeCookie] = useCookies(["sessionToken"]);
 
   // loads state from localstorage on mount
   useEffect(() => {
@@ -44,13 +46,14 @@ export const AuthContextProvider = ({
   ) => {
     verifiyAlturaGuard
       .mutateAsync({ address: address, alturaGuard: alturaGuard })
-      .then((authResponse: Character) => {
+      .then((authResponse) => {
         const newState = {
           ...state,
           walletAddress: address,
           isAuthenticated: !!authResponse,
-          session: authResponse.session ?? "",
+          session: authResponse?.session[0]?.sessionToken,
         };
+        setCookie("sessionToken", authResponse?.session[0]?.sessionToken);
         setState(newState);
         saveAuthContext(newState);
         onLogin?.();
